@@ -19,6 +19,8 @@
 		CD3F738B1CC92D59006053B6 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738A1CC92D59006053B6 /* MoreViewController.swift */; };
 		CD3F738D1CC92E3E006053B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */; };
 		CD3F738F1CC92EF2006053B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738E1CC92EF2006053B6 /* SignUpViewController.swift */; };
+		CDEEA7071CCF3166001FA71C /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7061CCF3166001FA71C /* Resource.swift */; };
+		CDEEA70A1CCF34E1001FA71C /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		CD3F738A1CC92D59006053B6 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CD3F738E1CC92EF2006053B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CDEEA7061CCF3166001FA71C /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				CD3F73581CC92A69006053B6 /* AppDelegate.swift */,
+				CDEEA7081CCF34D0001FA71C /* View */,
+				CDEEA7051CCF302E001FA71C /* Model */,
 				CD3F735A1CC92A69006053B6 /* SearchViewController.swift */,
 				CD3F735C1CC92A69006053B6 /* PostViewController.swift */,
 				CD3F73881CC92BCA006053B6 /* HomeViewController.swift */,
@@ -138,6 +144,22 @@
 				CD3F737C1CC92A6A006053B6 /* Info.plist */,
 			);
 			path = course_material_appUITests;
+			sourceTree = "<group>";
+		};
+		CDEEA7051CCF302E001FA71C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDEEA7061CCF3166001FA71C /* Resource.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		CDEEA7081CCF34D0001FA71C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +293,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDEEA70A1CCF34E1001FA71C /* ResourceTableViewCell.swift in Sources */,
 				CD3F738D1CC92E3E006053B6 /* ProfileViewController.swift in Sources */,
+				CDEEA7071CCF3166001FA71C /* Resource.swift in Sources */,
 				CD3F738F1CC92EF2006053B6 /* SignUpViewController.swift in Sources */,
 				CD3F738B1CC92D59006053B6 /* MoreViewController.swift in Sources */,
 				CD3F735D1CC92A69006053B6 /* PostViewController.swift in Sources */,
@@ -502,6 +526,7 @@
 				CD3F73811CC92A6A006053B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD3F73821CC92A6A006053B6 /* Build configuration list for PBXNativeTarget "course_material_appTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +535,7 @@
 				CD3F73841CC92A6A006053B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD3F73851CC92A6A006053B6 /* Build configuration list for PBXNativeTarget "course_material_appUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +544,7 @@
 				CD3F73871CC92A6A006053B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
