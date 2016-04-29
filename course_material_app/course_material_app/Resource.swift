@@ -7,13 +7,32 @@
 //
 
 import Foundation
+import UIKit
 
 class Resource {
-    var description : String?
-    var title : String?
+    var description : String
+    var title : String
+    var image : String?
+    var price : Float
+    var courseCode : String
+    var preferContact : String?
+    var type : String
     
-    init(title: String, description: String) {
+    init(title: String, description: String, price: Float, type: String, image: String?, courseCode: String, preferContact: String? ) {
         self.title = title
         self.description = description
+        self.price = price
+        self.type = type
+        self.courseCode = courseCode
+        
+        if let image = image {
+            self.image = image
+        }
+        
+        if let preferContact = preferContact {
+            self.preferContact = preferContact
+        }
     }
+    
+
 }
