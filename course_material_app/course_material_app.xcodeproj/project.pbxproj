@@ -19,6 +19,7 @@
 		CD3F738B1CC92D59006053B6 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738A1CC92D59006053B6 /* MoreViewController.swift */; };
 		CD3F738D1CC92E3E006053B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */; };
 		CD3F738F1CC92EF2006053B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3F738E1CC92EF2006053B6 /* SignUpViewController.swift */; };
+		CDAF740B1CD341A20032DD68 /* ResourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF740A1CD341A20032DD68 /* ResourceDetailViewController.swift */; };
 		CDEEA7071CCF3166001FA71C /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7061CCF3166001FA71C /* Resource.swift */; };
 		CDEEA70A1CCF34E1001FA71C /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		CD3F738A1CC92D59006053B6 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CD3F738E1CC92EF2006053B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CDAF740A1CD341A20032DD68 /* ResourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDetailViewController.swift; sourceTree = "<group>"; };
 		CDEEA7061CCF3166001FA71C /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 				CDEEA7051CCF302E001FA71C /* Model */,
 				CD3F735A1CC92A69006053B6 /* SearchViewController.swift */,
 				CD3F735C1CC92A69006053B6 /* PostViewController.swift */,
+				CDAF740A1CD341A20032DD68 /* ResourceDetailViewController.swift */,
 				CD3F73881CC92BCA006053B6 /* HomeViewController.swift */,
 				CD3F738A1CC92D59006053B6 /* MoreViewController.swift */,
 				CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */,
@@ -300,6 +303,7 @@
 				CD3F738B1CC92D59006053B6 /* MoreViewController.swift in Sources */,
 				CD3F735D1CC92A69006053B6 /* PostViewController.swift in Sources */,
 				CD3F73591CC92A69006053B6 /* AppDelegate.swift in Sources */,
+				CDAF740B1CD341A20032DD68 /* ResourceDetailViewController.swift in Sources */,
 				CD3F735B1CC92A69006053B6 /* SearchViewController.swift in Sources */,
 				CD3F73891CC92BCA006053B6 /* HomeViewController.swift in Sources */,
 			);

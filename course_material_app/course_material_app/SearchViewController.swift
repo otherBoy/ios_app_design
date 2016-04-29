@@ -9,10 +9,18 @@
 import UIKit
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var searchField: UITextField!
+    
+    
     
     var resources = [
-        Resource(title: "ICOM6042 notes", description: "notes from the course, includes cheatsheet for the exam"),
-        Resource(title: "ICOM6042 book", description: "great shape, mint condition")
+        Resource(title: "notes for ICOM6042", description: "Some test notes", price: 30.0 , type: "notes", image: "default", courseCode: "ICOM6042", preferContact: "email"),
+        Resource(title: "The hitchhiker's guide to E-Logistics for ECOM-6008", description: "great book in mint condition", price: 120.0 , type: "book", image: "default", courseCode: "ICOM6008", preferContact: "wechat")
+    ]
+    
+    var results = [
+        Resource(title: "notes for ICOM6042", description: "Some test notes", price: 30.0 , type: "notes", image: "default", courseCode: "ICOM6042", preferContact: "email"),
+        Resource(title: "The hitchhiker's guide to E-Logistics for ECOM-6008", description: "great book in mint condition", price: 120.0 , type: "book", image: "default", courseCode: "ICOM6008", preferContact: "wechat")
     ]
     
 
@@ -42,6 +50,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         // Set the title and image
         cell.titleLable.text = res.title
         cell.cellDescription.text = res.description
+
         
 //        // If the cell has a detail label, insert post description
 //        if let detailTextLabel = cell.detailTextLabel {
@@ -51,10 +60,37 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // present detail view when a cell is pressed
+    
+    @IBAction func search(sender: AnyObject) {
+        let keyword = searchField.text
+        
+        if keyword == "" {
+            resources = results
+            tableView.reloadData()
+        } else {
+            resources = resources.filter {$0.title.rangeOfString(keyword!) != nil}
+            tableView.reloadData()
+        }
+        
         
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // present detail view when a cell is pressed
+        performSegueWithIdentifier("detailSegue", sender: self)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "detailSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow, let resource = resources[indexPath.row] as? Resource  {
+                let destinationViewController = segue.destinationViewController as! ResourceDetailViewController
+                destinationViewController.resource = resource
+            }
+        }
+    }
+
     
     
 
