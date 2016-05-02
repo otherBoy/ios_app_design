@@ -1,8 +1,8 @@
 //
-//  SignUpViewController.swift
+//  LoginViewController.swift
 //  course_material_app
 //
-//  Created by MIRKO on 4/21/16.
+//  Created by Robert Wei on 2/5/2016.
 //  Copyright © 2016 hku_project. All rights reserved.
 //
 
@@ -10,19 +10,12 @@ import Foundation
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
-    @IBOutlet var confirmPasswordTF: UITextField!
-    @IBOutlet var firstNameTF: UITextField!
-    @IBOutlet var lastNameTF: UITextField!
-    @IBOutlet var universityTF: UITextField!
-    @IBOutlet var facultyTF: UITextField!
-    @IBOutlet var phoneTF: UITextField!
-    @IBOutlet var whatsappTF: UITextField!
     
-    @IBOutlet var signUpBtn: UIButton!
+    @IBOutlet var loginBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +28,7 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     /*
      // #pragma mark - Navigation
      
@@ -45,41 +39,25 @@ class SignUpViewController: UIViewController {
      }
      */
     
-    @IBAction func signUp(sender: UIButton) {
+    @IBAction func login(sender: UIButton) {
         let email:NSString = emailTF.text!
         let password:NSString = passwordTF.text!
-        let confirmPassword:NSString = confirmPasswordTF.text!
-        let firstName:NSString = firstNameTF.text!
-        let lastName:NSString = lastNameTF.text!
-        let university:NSString = universityTF.text!
-        let faculty:NSString = facultyTF.text!
-        let phone:NSString = phoneTF.text!
-        let whatsapp:NSString = whatsappTF.text!
         
-        if (email.isEqualToString("") || password.isEqualToString("")
-            || confirmPassword.isEqualToString("")) {
+        if (email.isEqualToString("") || password.isEqualToString("")) {
             let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Sign up failed!"
-            alertView.message = "Email or password cannot be empty."
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
-        }
-        else if (!password.isEqual(confirmPassword)) {
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Sign up failed!"
-            alertView.message = "Passwords are inconsistent."
+            alertView.title = "Login failed!"
+            alertView.message = "Please enter your email and password."
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
         }
         else {
             do {
-                let post:NSString = "email=\(email)&password=\(password)&firstname=\(firstName)&lastname=\(lastName)&university=\(university)&faculty=\(faculty)&phone=\(phone)&whatsapp=\(whatsapp)"
+                let post:NSString = "email=\(email)&password=\(password)"
                 
                 NSLog("PostData: %@",post);
                 
-                let url:NSURL = NSURL(string: "https://course-meterial.com/signup.php")!
+                let url:NSURL = NSURL(string:"https://course-meterial.com/login.php")!
                 
                 let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
                 
@@ -91,7 +69,6 @@ class SignUpViewController: UIViewController {
                 request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
                 request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 request.setValue("application/json", forHTTPHeaderField: "Accept")
-                
                 
                 var reponseError: NSError?
                 var response: NSURLResponse?
@@ -117,7 +94,7 @@ class SignUpViewController: UIViewController {
                         
                         //var error: NSError?
                         
-                        let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                        let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
                         
                         let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                         
@@ -126,10 +103,15 @@ class SignUpViewController: UIViewController {
                         NSLog("Success: %ld", success);
                         
                         if(success == 1) {
-                            NSLog("Sign up success");
+                            NSLog("Login success");
+                            
+                            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                            prefs.setObject(email, forKey: "EMAIL")
+                            prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                            prefs.synchronize()
+                            
                             self.dismissViewControllerAnimated(true, completion: nil)
-                        }
-                        else {
+                        } else {
                             var error_msg:NSString
                             
                             if (jsonData["error_message"] as? NSString != nil) {
@@ -139,7 +121,7 @@ class SignUpViewController: UIViewController {
                                 error_msg = "Unknown error"
                             }
                             let alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Sign up failed!"
+                            alertView.title = "Login failed!"
                             alertView.message = error_msg as String
                             alertView.delegate = self
                             alertView.addButtonWithTitle("OK")
@@ -148,7 +130,7 @@ class SignUpViewController: UIViewController {
                     }
                     else {
                         let alertView:UIAlertView = UIAlertView()
-                        alertView.title = "Sign up failed!"
+                        alertView.title = "Login failed!"
                         alertView.message = "Connection failed"
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
@@ -157,7 +139,7 @@ class SignUpViewController: UIViewController {
                 }
                 else {
                     let alertView:UIAlertView = UIAlertView()
-                    alertView.title = "Sign up failed!"
+                    alertView.title = "Login failed!"
                     alertView.message = "Connection failed"
                     if let error = reponseError {
                         alertView.message = (error.localizedDescription)
@@ -169,8 +151,8 @@ class SignUpViewController: UIViewController {
             }
             catch {
                 let alertView:UIAlertView = UIAlertView()
-                alertView.title = "Sign up failed!"
-                alertView.message = "Server error!"
+                alertView.title = "Login failed!"
+                alertView.message = "Server error"
                 alertView.delegate = self
                 alertView.addButtonWithTitle("OK")
                 alertView.show()
@@ -179,7 +161,7 @@ class SignUpViewController: UIViewController {
         
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()
         return true
     }

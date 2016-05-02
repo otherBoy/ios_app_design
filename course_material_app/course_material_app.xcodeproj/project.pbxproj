@@ -22,6 +22,7 @@
 		CDAF740B1CD341A20032DD68 /* ResourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAF740A1CD341A20032DD68 /* ResourceDetailViewController.swift */; };
 		CDEEA7071CCF3166001FA71C /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7061CCF3166001FA71C /* Resource.swift */; };
 		CDEEA70A1CCF34E1001FA71C /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */; };
+		E18047C21CD7103500954883 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18047C11CD7103500954883 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		CDAF740A1CD341A20032DD68 /* ResourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDetailViewController.swift; sourceTree = "<group>"; };
 		CDEEA7061CCF3166001FA71C /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		CDEEA7091CCF34E1001FA71C /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
+		E18047C11CD7103500954883 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				CD3F738A1CC92D59006053B6 /* MoreViewController.swift */,
 				CD3F738C1CC92E3E006053B6 /* ProfileViewController.swift */,
 				CD3F738E1CC92EF2006053B6 /* SignUpViewController.swift */,
+				E18047C11CD7103500954883 /* LoginViewController.swift */,
 				CD3F735E1CC92A6A006053B6 /* Main.storyboard */,
 				CD3F73611CC92A6A006053B6 /* Assets.xcassets */,
 				CD3F73631CC92A6A006053B6 /* LaunchScreen.storyboard */,
@@ -306,6 +309,7 @@
 				CDAF740B1CD341A20032DD68 /* ResourceDetailViewController.swift in Sources */,
 				CD3F735B1CC92A69006053B6 /* SearchViewController.swift in Sources */,
 				CD3F73891CC92BCA006053B6 /* HomeViewController.swift in Sources */,
+				E18047C21CD7103500954883 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
