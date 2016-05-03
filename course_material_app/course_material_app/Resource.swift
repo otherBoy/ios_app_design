@@ -17,13 +17,17 @@ class Resource {
     var courseCode : String
     var preferContact : String?
     var type : String
+    var addDate : NSDate?
+    var exchange : String?
     
-    init(title: String, description: String, price: Float, type: String, image: String?, courseCode: String, preferContact: String? ) {
+    init(title: String, description: String, price: Float, type: String, image: String?, courseCode: String, preferContact: String?, exchange: String?, addDate: NSDate? ) {
         self.title = title
         self.description = description
         self.price = price
         self.type = type
         self.courseCode = courseCode
+        self.addDate = addDate
+        self.exchange = exchange
         
         if let image = image {
             self.image = image

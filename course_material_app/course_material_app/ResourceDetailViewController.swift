@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class ResourceDetailViewController: UIViewController {
+    @IBOutlet weak var contactButton: UIButton!
     
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var courseLabel: UILabel!
@@ -31,7 +32,37 @@ class ResourceDetailViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        if resource?.preferContact == "email" {
+            contactButton.setTitle("email", forState: UIControlState.Normal)
+        } else if resource?.preferContact == "wechat" {
+            contactButton.setTitle("wechat", forState: UIControlState.Normal)
+        } else if resource?.preferContact == "whatsapp" {
+            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
+        } else {
+            contactButton.setTitle("Phone", forState: UIControlState.Normal)
+        }
+    }
     
+    
+    @IBAction func contactAction(sender: AnyObject) {
+        if resource?.preferContact == "email" {
+            let email = "foo@bar.com"
+            let url = NSURL(string: "mailto:\(email)")
+            UIApplication.sharedApplication().openURL(url!)
+        } else if resource?.preferContact == "wechat" {
+            contactButton.setTitle("wechat", forState: UIControlState.Normal)
+        } else if resource?.preferContact == "whatsapp" {
+            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
+        } else {
+            let phone = 55998380
+            if let url = NSURL(string: "tel://\(phone)") {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+        
+    }
     
 
     @IBAction func backButton(sender: AnyObject) {
