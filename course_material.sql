@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `USER` (
   `FACULTY` varchar(50) NOT NULL,
   `PHONE_NUMBER` varchar(50) NOT NULL,
   `WHATSAPP` varchar(60) default NULL,
-  `WECHAT` varchar(60) default NULL,
   PRIMARY KEY  (`USER_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
@@ -37,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `USER` (
 -- Dumping data for table `USER`
 --
 
-INSERT INTO `USER` (`USER_ID`, `EMAIL`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `UNIVERSITY`, `FACULTY`, `PHONE_NUMBER`, `WHATSAPP`, `WECHAT`) VALUES
-(1, 'robert@gmail.com', '12345', 'robert', 'wei',  'HKU', 'engineering', '61520001', NULL, NULL),
-(2, 'mirko@gmail.com',  '54321', 'mirko',  'zhao', 'HKU', 'engineering', '61520002', NULL, NULL);
+INSERT INTO `USER` (`USER_ID`, `EMAIL`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `UNIVERSITY`, `FACULTY`, `PHONE_NUMBER`, `WHATSAPP`) VALUES
+(1, 'robert@gmail.com', '12345', 'robert', 'wei',  'HKU', 'engineering', '61520001', NULL),
+(2, 'mirko@gmail.com',  '54321', 'mirko',  'zhao', 'HKU', 'engineering', '61520002', NULL);
 
 -- --------------------------------------------------------
 
