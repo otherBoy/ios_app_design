@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `RESOURCE` (
   `COURSE_CODE` varchar(12) NOT NULL,
   `PREFER_CONTACT` int(4) unsigned default '0',
   `PRICE` decimal(11) unsigned default '0.0',
+  `EXCHANGE_FOR` varchar(30) default NULL,
   `USER_ID` int(11) references USER(USER_ID),
   PRIMARY KEY  (`RESOURCE_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;

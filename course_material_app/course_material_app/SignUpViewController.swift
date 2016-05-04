@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController {
                 
                 NSLog("PostData: %@",post);
                 
-                let url:NSURL = NSURL(string: "https://course-meterial.com/signup.php")!
+                let url:NSURL = NSURL(string: "https://afternoon-sands-99165.herokuapp.com/signup.php")!
                 
                 let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
                 
