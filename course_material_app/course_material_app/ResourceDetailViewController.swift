@@ -10,15 +10,23 @@ import Foundation
 import UIKit
 
 class ResourceDetailViewController: UIViewController {
+    var fetchTask: NSURLSessionDataTask?
+    
+    
     @IBOutlet weak var contactButton: UIButton!
     
+    @IBOutlet weak var postedByLabel: UILabel!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet var postedByLabel: UIView!
+
     @IBOutlet weak var titleLable: UILabel!
     var resource : Resource?
+    
+    var phone = ""
+    var email = ""
+    var whatsapp = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,36 +38,102 @@ class ResourceDetailViewController: UIViewController {
         
         imageView.image = UIImage(named: "default")
         
+        fetchTask = Server.sharedInstance().taskForUser((resource?.owner)!) { jsonResult, error in
+            if let error = error {
+                print("Error searching for actors: \(error.localizedDescription)")
+                return
+            }
+            
+            if let info = jsonResult as? [[String : AnyObject]] {
+                print(info)
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    let name = info[0]["name"] as! String
+                    self.postedByLabel.text = "posted by " + name
+                    
+                }
+
+                if let whatsapp = info[0]["whatsapp"] as? String  {
+                    self.whatsapp = whatsapp
+                } else {
+                    print("no whatsapp")
+                    self.whatsapp = ""
+                }
+                
+                if let email = info[0]["email"] as? String {
+                    self.email = email
+                } else {
+                    print("no email")
+                    self.email = ""
+                }
+                
+                if let phone = info[0]["phone"] as? String {
+                    self.phone = phone
+                } else {
+                    print("no phone")
+                    self.phone = ""
+                }
+                
+            }
+
+            }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        if resource?.preferContact == "email" {
-            contactButton.setTitle("email", forState: UIControlState.Normal)
-        } else if resource?.preferContact == "wechat" {
-            contactButton.setTitle("wechat", forState: UIControlState.Normal)
-        } else if resource?.preferContact == "whatsapp" {
-            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
-        } else {
-            contactButton.setTitle("Phone", forState: UIControlState.Normal)
-        }
+//        if resource?.preferContact == "email" {
+//            contactButton.setTitle("email", forState: UIControlState.Normal)
+//        } else if resource?.preferContact == "wechat" {
+//            contactButton.setTitle("wechat", forState: UIControlState.Normal)
+//        } else if resource?.preferContact == "whatsapp" {
+//            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
+//        } else {
+//            contactButton.setTitle("Phone", forState: UIControlState.Normal)
+//        }
     }
     
     
     @IBAction func contactAction(sender: AnyObject) {
-        if resource?.preferContact == "email" {
-            let email = "foo@bar.com"
-            let url = NSURL(string: "mailto:\(email)")
-            UIApplication.sharedApplication().openURL(url!)
-        } else if resource?.preferContact == "wechat" {
-            contactButton.setTitle("wechat", forState: UIControlState.Normal)
-        } else if resource?.preferContact == "whatsapp" {
-            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
-        } else {
-            let phone = 55998380
+//        if resource?.preferContact == "email" {
+//            let email = "foo@bar.com"
+//            let url = NSURL(string: "mailto:\(email)")
+//            UIApplication.sharedApplication().openURL(url!)
+//        } else if resource?.preferContact == "wechat" {
+//            contactButton.setTitle("wechat", forState: UIControlState.Normal)
+//        } else if resource?.preferContact == "whatsapp" {
+//            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
+//        } else {
+//            let phone = 55998380
+//            if let url = NSURL(string: "tel://\(phone)") {
+//                UIApplication.sharedApplication().openURL(url)
+//            }
+//        }
+        
+        switch resource?.preferContact {
+        case 1?:
+            dispatch_async(dispatch_get_main_queue()) {
+                self.contactButton.setTitle("email: \(self.email)", forState: UIControlState.Normal)
+            }
+            if let url = NSURL(string: "mailto:\(email)") {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        case 2?:
+            dispatch_async(dispatch_get_main_queue()) {
+                self.contactButton.setTitle("phone: \(self.phone)", forState: UIControlState.Normal)
+                
+            }
             if let url = NSURL(string: "tel://\(phone)") {
                 UIApplication.sharedApplication().openURL(url)
             }
+        case 3?:
+            dispatch_async(dispatch_get_main_queue()) {
+                self.contactButton.setTitle("whatsapp: \(self.whatsapp)", forState: UIControlState.Normal)
+                
+            }
+            print("whatsapp")
+        default:
+            print("default")
         }
         
     }
