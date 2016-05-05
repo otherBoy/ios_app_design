@@ -11,21 +11,15 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var sortingPicker: UIPickerView!
+    var fetchTask: NSURLSessionDataTask?
     
     @IBOutlet weak var freeSwitch: UISwitch!
     
     var pickerDataSource = ["Recent", "Price Desc", "Price Asc"];
     
-    var resources = [
-        Resource(title: "notes for ICOM6042", description: "Some test notes", price: 30.0 , type: "notes", image: "default", courseCode: "ICOM6042", preferContact: "email", exchange: "", addDate: NSDate()),
-        Resource(title: "The hitchhiker's guide to E-Logistics for ECOM-6008", description: "great book in mint condition", price: 120.0 , type: "book", image: "default", courseCode: "ICOM6008", preferContact: "wechat", exchange: "", addDate: NSDate())
-    ]
+    var results = [Resource]()
     
-    var results = [
-        Resource(title: "notes for ICOM6042", description: "Some test notes", price: 30.0 , type: "notes", image: "default", courseCode: "ICOM6042", preferContact: "wechat", exchange: "", addDate: NSDate()),
-        Resource(title: "The hitchhiker's guide to E-Logistics for ECOM-6008", description: "great book in mint condition", price: 120.0 , type: "book", image: "default", courseCode: "ICOM6008", preferContact: "wechat", exchange: "", addDate: NSDate())
-    ]
-    
+    var resources = [Resource]()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,6 +34,40 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         freeSwitch.addTarget(self, action: #selector(SearchViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
 
         // Do any additional setup after loading the view, typically from a nib.
+        
+        fetchTask = Server.sharedInstance().taskForResource() { jsonResult, error in
+            if let error = error {
+                print("Error searching for actors: \(error.localizedDescription)")
+                return
+            }
+            
+            if let resources = jsonResult as? [[String : AnyObject]] {
+                print(resources)
+//                let formatter = NSDateFormatter()
+//                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                
+//                for resource in resources {
+////                    let date = String(resource["POSTED_DATE"])
+////                    self.resources_try.append(Resource(title: (resource["TITLE"] as! String), description: (resource["DESCRIPTION"] as! String), price: resource["PRICE"]!.floatValue, type: (resource["TYPE"] as! String), image: "default", courseCode: (resource["COURSE_CODE"] as! String), preferContact: (resource["PREFER_CONTACT"] as! Int), exchange: (resource["EXCHANGE"] as! String), addDate: formatter.dateFromString(date)))
+//                    
+//                }
+                
+                self.results = resources.map() {
+                    Resource(dictionary: $0)
+                }
+                
+                print(self.results)
+                self.resources = self.results
+                // Reload the table on the main thread
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
+        
+        
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
