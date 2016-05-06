@@ -43,14 +43,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             
             if let resources = jsonResult as? [[String : AnyObject]] {
                 print(resources)
-//                let formatter = NSDateFormatter()
-//                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                
-//                for resource in resources {
-////                    let date = String(resource["POSTED_DATE"])
-////                    self.resources_try.append(Resource(title: (resource["TITLE"] as! String), description: (resource["DESCRIPTION"] as! String), price: resource["PRICE"]!.floatValue, type: (resource["TYPE"] as! String), image: "default", courseCode: (resource["COURSE_CODE"] as! String), preferContact: (resource["PREFER_CONTACT"] as! Int), exchange: (resource["EXCHANGE"] as! String), addDate: formatter.dateFromString(date)))
-//                    
-//                }
                 
                 self.results = resources.map() {
                     Resource(dictionary: $0)
@@ -76,8 +68,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // reloading table data after change
-//        let cell = tableView.dequeueReusableCellWithIdentifier("resCell")!
+
         let res = self.resources[indexPath.row]
         
         let cellIdentifier = "resCell"
@@ -87,11 +78,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         cell.titleLable.text = res.title
         cell.cellDescription.text = res.description
 
-        
-//        // If the cell has a detail label, insert post description
-//        if let detailTextLabel = cell.detailTextLabel {
-//            detailTextLabel.text = res.description
-//        }
         
         return cell
     }

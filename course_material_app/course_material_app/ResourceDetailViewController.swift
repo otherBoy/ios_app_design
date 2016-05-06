@@ -20,6 +20,7 @@ class ResourceDetailViewController: UIViewController {
     @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var exchangeLabel: UILabel!
 
     @IBOutlet weak var titleLable: UILabel!
     var resource : Resource?
@@ -35,6 +36,7 @@ class ResourceDetailViewController: UIViewController {
         priceLabel.text = "HKD "+String(resource!.price)
         descriptionText.text = resource?.description
         courseLabel.text = resource?.courseCode
+        exchangeLabel.text = resource?.exchange
         
         imageView.image = UIImage(named: "default")
         
@@ -82,33 +84,12 @@ class ResourceDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-//        if resource?.preferContact == "email" {
-//            contactButton.setTitle("email", forState: UIControlState.Normal)
-//        } else if resource?.preferContact == "wechat" {
-//            contactButton.setTitle("wechat", forState: UIControlState.Normal)
-//        } else if resource?.preferContact == "whatsapp" {
-//            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
-//        } else {
-//            contactButton.setTitle("Phone", forState: UIControlState.Normal)
-//        }
+
     }
     
     
     @IBAction func contactAction(sender: AnyObject) {
-//        if resource?.preferContact == "email" {
-//            let email = "foo@bar.com"
-//            let url = NSURL(string: "mailto:\(email)")
-//            UIApplication.sharedApplication().openURL(url!)
-//        } else if resource?.preferContact == "wechat" {
-//            contactButton.setTitle("wechat", forState: UIControlState.Normal)
-//        } else if resource?.preferContact == "whatsapp" {
-//            contactButton.setTitle("WhatsApp", forState: UIControlState.Normal)
-//        } else {
-//            let phone = 55998380
-//            if let url = NSURL(string: "tel://\(phone)") {
-//                UIApplication.sharedApplication().openURL(url)
-//            }
-//        }
+
         
         switch resource?.preferContact {
         case 1?:
