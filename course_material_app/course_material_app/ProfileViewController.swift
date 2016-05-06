@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var phoneTF: UITextField!
     @IBOutlet var whatsappTF: UITextField!
 
+    @IBOutlet var backBtn: UIButton!
     @IBOutlet var editBtn: UIButton!    
     
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class ProfileViewController: UIViewController {
             
             NSLog("PostData: %@",post);
             
-            let url:NSURL = NSURL(string: "https://course-meterial.com/edit.php")!
+            let url:NSURL = NSURL(string: "https://afternoon-sands-99165.herokuapp.com/edit.php")!
             
             let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             
@@ -142,6 +143,10 @@ class ProfileViewController: UIViewController {
             alertView.show()
         }
         
+    }
+    
+    @IBAction func pageBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method

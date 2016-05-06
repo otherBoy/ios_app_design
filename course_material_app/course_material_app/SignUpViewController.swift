@@ -23,6 +23,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var whatsappTF: UITextField!
     
     @IBOutlet var signUpBtn: UIButton!
+    @IBOutlet var backBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,6 +178,10 @@ class SignUpViewController: UIViewController {
             }
         }
         
+    }
+    
+    @IBAction func pageBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method

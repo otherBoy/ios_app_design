@@ -88,8 +88,10 @@ class PostViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let title:NSString = titleTF.text!
         let description:NSString = descriptionTF.text!
         let courseCode:NSString = courseCodeTF.text!
-        let price:NSString = priceTF.text!
         let exchangeFor:NSString = exchangeTF.text!
+        
+        let price:NSString = priceTF.text!
+        let priceValue = price.floatValue
         
         let type:NSString = selected
         
@@ -139,7 +141,7 @@ class PostViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         else {
             do {
-                let post:NSString = "title=\(title)&description=\(description)&type=\(type)&code=\(courseCode)&contact=\(preferContact)&price=\(price)&exchange=\(exchangeFor)"
+                let post:NSString = "title=\(title)&description=\(description)&type=\(type)&code=\(courseCode)&contact=\(preferContact)&price=\(priceValue)&exchange=\(exchangeFor)"
                 
                 NSLog("PostData: %@",post);
                 

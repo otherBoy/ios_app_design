@@ -10,34 +10,169 @@ import Foundation
 
 import UIKit
 
+enum LoginShowType {
+    case NONE
+    case USER
+    case PASS
+}
+
 class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
     @IBOutlet var loginBtn: UIButton!
+    @IBOutlet var backBtn: UIButton!
+    
+    //the distance from left hand to head
+    var offsetLeftHand:CGFloat = 60
+    
+    //hand pictures used for covering eyes
+    var imgLeftHand:UIImageView!
+    var imgRightHand:UIImageView!
+    
+    //normal hand pictures
+    var imgLeftHandGone:UIImageView!
+    var imgRightHandGone:UIImageView!
+    
+    var showType:LoginShowType = LoginShowType.NONE
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let mainSize = UIScreen.mainScreen().bounds.size
         
-        // Do any additional setup after loading the view.
+        //draw the head of owl
+        let imgLogin =  UIImageView(frame:CGRectMake(mainSize.width/2-211/2, 100, 211, 109))
+        imgLogin.image = UIImage(named:"owl-login")
+        imgLogin.layer.masksToBounds = true
+        self.view.addSubview(imgLogin)
+        
+        //draw left hand (cover eyes)
+        let rectLeftHand = CGRectMake(61 - offsetLeftHand, 90, 40, 65)
+        imgLeftHand = UIImageView(frame:rectLeftHand)
+        imgLeftHand.image = UIImage(named:"owl-login-arm-left")
+        imgLogin.addSubview(imgLeftHand)
+        
+        //draw right hand (cover eyes)
+        let rectRightHand = CGRectMake(imgLogin.frame.size.width / 2 + 60, 90, 40, 65)
+        imgRightHand = UIImageView(frame:rectRightHand)
+        imgRightHand.image = UIImage(named:"owl-login-arm-right")
+        imgLogin.addSubview(imgRightHand)
+        
+        //draw the background box
+        let vLogin =  UIView(frame:CGRectMake(15, 200, mainSize.width - 30, 160))
+        //vLogin.layer.borderWidth = 0.5
+        //vLogin.layer.borderColor = UIColor.lightGrayColor().CGColor
+        vLogin.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(vLogin)
+        
+        //draw left hand
+        let rectLeftHandGone = CGRectMake(mainSize.width / 2 - 100,
+                                          vLogin.frame.origin.y - 22, 40, 40)
+        imgLeftHandGone = UIImageView(frame:rectLeftHandGone)
+        imgLeftHandGone.image = UIImage(named:"icon_hand")
+        self.view.addSubview(imgLeftHandGone)
+        
+        //draw right hand
+        let rectRightHandGone = CGRectMake(mainSize.width / 2 + 62,
+                                           vLogin.frame.origin.y - 22, 40, 40)
+        imgRightHandGone = UIImageView(frame:rectRightHandGone)
+        imgRightHandGone.image = UIImage(named:"icon_hand")
+        self.view.addSubview(imgRightHandGone)
+        
+        //email input box
+        emailTF = UITextField(frame:CGRectMake(30, 30, vLogin.frame.size.width - 60, 44))
+        emailTF.delegate = self
+        emailTF.layer.cornerRadius = 5
+        emailTF.layer.borderColor = UIColor.lightGrayColor().CGColor
+        emailTF.layer.borderWidth = 0.5
+        emailTF.leftView = UIView(frame:CGRectMake(0, 0, 44, 44))
+        emailTF.leftViewMode = UITextFieldViewMode.Always
+        
+        let imgUser =  UIImageView(frame:CGRectMake(11, 11, 22, 22))
+        imgUser.image = UIImage(named:"iconfont-user")
+        emailTF.leftView!.addSubview(imgUser)
+        vLogin.addSubview(emailTF)
+        
+        //password input box
+        passwordTF = UITextField(frame:CGRectMake(30, 90, vLogin.frame.size.width - 60, 44))
+        passwordTF.delegate = self
+        passwordTF.layer.cornerRadius = 5
+        passwordTF.layer.borderColor = UIColor.lightGrayColor().CGColor
+        passwordTF.layer.borderWidth = 0.5
+        passwordTF.secureTextEntry = true
+        passwordTF.leftView = UIView(frame:CGRectMake(0, 0, 44, 44))
+        passwordTF.leftViewMode = UITextFieldViewMode.Always
+        
+        let imgPwd =  UIImageView(frame:CGRectMake(11, 11, 22, 22))
+        imgPwd.image = UIImage(named:"iconfont-password")
+        passwordTF.leftView!.addSubview(imgPwd)
+        vLogin.addSubview(passwordTF)
+    }
+    
+    //get the input box type
+    func textFieldDidBeginEditing(textField:UITextField)
+    {
+        //select email input box
+        if textField.isEqual(emailTF) {
+            if (showType != LoginShowType.PASS)
+            {
+                showType = LoginShowType.USER
+                return
+            }
+            showType = LoginShowType.USER
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.imgLeftHand.frame = CGRectMake(
+                    self.imgLeftHand.frame.origin.x - self.offsetLeftHand,
+                    self.imgLeftHand.frame.origin.y + 30,
+                    self.imgLeftHand.frame.size.width, self.imgLeftHand.frame.size.height)
+                self.imgRightHand.frame = CGRectMake(
+                    self.imgRightHand.frame.origin.x + 48,
+                    self.imgRightHand.frame.origin.y + 30,
+                    self.imgRightHand.frame.size.width, self.imgRightHand.frame.size.height)
+                self.imgLeftHandGone.frame = CGRectMake(
+                    self.imgLeftHandGone.frame.origin.x - 70,
+                    self.imgLeftHandGone.frame.origin.y, 40, 40)
+                self.imgRightHandGone.frame = CGRectMake(
+                    self.imgRightHandGone.frame.origin.x + 30,
+                    self.imgRightHandGone.frame.origin.y, 40, 40)
+            })
+        }
+        //select password input box
+        else if textField.isEqual(passwordTF) {
+            if (showType == LoginShowType.PASS)
+            {
+                showType = LoginShowType.PASS
+                return
+            }
+            showType = LoginShowType.PASS
+            
+            //cover eyes
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.imgLeftHand.frame = CGRectMake(
+                    self.imgLeftHand.frame.origin.x + self.offsetLeftHand,
+                    self.imgLeftHand.frame.origin.y - 30,
+                    self.imgLeftHand.frame.size.width, self.imgLeftHand.frame.size.height)
+                self.imgRightHand.frame = CGRectMake(
+                    self.imgRightHand.frame.origin.x - 48,
+                    self.imgRightHand.frame.origin.y - 30,
+                    self.imgRightHand.frame.size.width, self.imgRightHand.frame.size.height)
+                self.imgLeftHandGone.frame = CGRectMake(
+                    self.imgLeftHandGone.frame.origin.x + 70,
+                    self.imgLeftHandGone.frame.origin.y, 0, 0)
+                self.imgRightHandGone.frame = CGRectMake(
+                    self.imgRightHandGone.frame.origin.x - 30,
+                    self.imgRightHandGone.frame.origin.y, 0, 0)
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // #pragma mark - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     @IBAction func login(sender: UIButton) {
         let email:NSString = emailTF.text!
@@ -159,6 +294,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
         
+    }
+    
+    @IBAction func pageBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
