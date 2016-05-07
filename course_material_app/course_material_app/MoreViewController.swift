@@ -28,7 +28,8 @@ class MoreViewController: UIViewController {
             logout.setTitle("Logout", forState: UIControlState.Normal)
             logout.enabled = true
         } else {
-            logout.hidden = true
+            logout.enabled = false
+            logout.setTitle("Login to logout!", forState: UIControlState.Normal)
         }
     }
     
@@ -45,8 +46,10 @@ class MoreViewController: UIViewController {
                 return
             }
         
-            if let result = jsonResult  {
-                print(result)
+            if let _ = jsonResult  {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.logout.setTitle("You logged out!", forState: UIControlState.Normal)
+                }
             }
             
         }
