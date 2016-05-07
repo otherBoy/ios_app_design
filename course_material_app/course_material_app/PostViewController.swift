@@ -50,7 +50,21 @@ class PostViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         phoneSwitch.addTarget(self, action: #selector(PostViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         emailSwitch.addTarget(self, action: #selector(PostViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         whatsappSwitch.addTarget(self, action: #selector(PostViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        
+        
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("loggedIn") {
+            postBtn.setTitle("Post", forState: UIControlState.Normal)
+            postBtn.enabled = true
+        } else {
+            postBtn.enabled = false
+            postBtn.setTitle("Log in First!", forState: UIControlState.Normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {

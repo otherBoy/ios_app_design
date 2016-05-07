@@ -239,6 +239,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                         
                         if(success == 1) {
                             NSLog("Login success");
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            defaults.setBool(true, forKey: "loggedIn")
+
                             
                             let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                             prefs.setObject(email, forKey: "EMAIL")

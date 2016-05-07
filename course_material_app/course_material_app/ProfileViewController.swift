@@ -28,6 +28,18 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("loggedIn") {
+            editBtn.setTitle("Edit", forState: UIControlState.Normal)
+            editBtn.enabled = true
+        } else {
+            editBtn.enabled = false
+            editBtn.setTitle("Log in First!", forState: UIControlState.Normal)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

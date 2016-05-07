@@ -21,23 +21,7 @@ class Resource {
     var exchange : String?
     var owner : Int
     
-//    init(title: String, description: String, price: Float, type: String, image: String?, courseCode: String?, preferContact: Int?, exchange: String?, addDate: NSDate? ) {
-//        self.title = title
-//        self.description = description
-//        self.price = price
-//        self.type = type
-//        self.courseCode = courseCode
-//        self.addDate = addDate
-//        self.exchange = exchange
-//        
-//        if let image = image {
-//            self.image = image
-//        }
-//        
-//        if let preferContact = preferContact {
-//            self.preferContact = preferContact
-//        }
-//    }
+
     
     init(dictionary: [String : AnyObject]) {
         

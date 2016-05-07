@@ -81,6 +81,30 @@ class Server : NSObject {
 
     }
     
+    func logout(completionHandler: CompletionHander) -> NSURLSessionDataTask {
+        
+        
+        let urlString = "https://afternoon-sands-99165.herokuapp.com/logout.php"
+        let url = NSURL(string: urlString)!
+        let request = NSURLRequest(URL: url)
+        print("task is called")
+        
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            
+            if let error = downloadError {
+                print("Error encountered. breakpoint = 1")
+                print(error)
+            } else {
+                print("Step 3 - taskForResource's completionHandler is invoked.")
+                Server.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
+            }
+        }
+        
+        task.resume()
+        
+        return task
+        
+    }
 
     
     // Parsing the JSON

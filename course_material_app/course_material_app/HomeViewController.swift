@@ -9,6 +9,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    @IBOutlet weak var loginBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,18 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("loggedIn") {
+            loginBtn.hidden = true
+        } else {
+            loginBtn.hidden = false
+            loginBtn.enabled = true
+            loginBtn.setTitle("Login", forState: UIControlState.Normal)
+        }
     }
 
 }

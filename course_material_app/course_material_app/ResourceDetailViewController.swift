@@ -114,7 +114,12 @@ class ResourceDetailViewController: UIViewController {
             }
             print("whatsapp")
         default:
-            print("default")
+            dispatch_async(dispatch_get_main_queue()) {
+                self.contactButton.setTitle("email: \(self.email)", forState: UIControlState.Normal)
+            }
+            if let url = NSURL(string: "mailto:\(email)") {
+                UIApplication.sharedApplication().openURL(url)
+            }
         }
         
     }

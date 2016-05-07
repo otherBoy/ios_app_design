@@ -638,6 +638,9 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="logout:" destination="UpG-js-07k" eventType="touchUpInside" id="Pe4-2f-2eb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="More &amp; Settings" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pp1-iR-ENA">
                                 <rect key="frame" x="172" y="28" width="257" height="42"/>
@@ -688,6 +691,9 @@
                     <tabBarItem key="tabBarItem" title="" image="more" id="nnM-B8-us9">
                         <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="logout" destination="B7C-Rp-cz6" id="knl-fk-Rwv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmK-zp-G1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1418,6 +1424,9 @@
                     <tabBarItem key="tabBarItem" title="" image="book-1" id="7jA-tY-i08">
                         <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="loginBtn" destination="Fa5-Mx-caf" id="A6q-kO-3MF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdn-BO-h77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

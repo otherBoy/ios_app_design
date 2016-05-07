@@ -20,4 +20,38 @@ class MoreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("loggedIn") {
+            logout.hidden = false
+            logout.setTitle("Logout", forState: UIControlState.Normal)
+            logout.enabled = true
+        } else {
+            logout.hidden = true
+        }
+    }
+    
+    @IBOutlet weak var logout: UIButton!
+    
+    
+    @IBAction func logout(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(false, forKey: "loggedIn")
+        
+        _ = Server.sharedInstance().logout() { jsonResult, error in
+            if let error = error {
+                print("Error searching for actors: \(error.localizedDescription)")
+                return
+            }
+        
+            if let result = jsonResult  {
+                print(result)
+            }
+            
+        }
+        
+    }
+    
+    
 }
