@@ -2,7 +2,7 @@
 //  ProfileViewController.swift
 //  course_material_app
 //
-//  Created by MIRKO on 4/21/16.
+//  Created by Robert Wei on 4/21/16.
 //  Copyright © 2016 hku_project. All rights reserved.
 //
 
