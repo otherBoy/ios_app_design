@@ -33,7 +33,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         
         freeSwitch.addTarget(self, action: #selector(SearchViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
 
-        // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
         fetchTask = Server.sharedInstance().taskForResource() { jsonResult, error in
             if let error = error {
@@ -57,10 +61,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             }
             
         }
-        
-        
+
         
     }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.resources.count
