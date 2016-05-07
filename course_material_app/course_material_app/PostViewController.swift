@@ -192,8 +192,14 @@ class PostViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                         NSLog("Success: %ld", success);
                         
                         if(success == 1) {
-                            NSLog("Sign up success");
+                            NSLog("Post resource success");
                             self.dismissViewControllerAnimated(true, completion: nil)
+                            let alertView:UIAlertView = UIAlertView()
+                            alertView.message = "Post success!"
+                            alertView.delegate = self
+                            alertView.addButtonWithTitle("OK")
+                            alertView.show()
+
                         }
                         else {
                             var error_msg:NSString
